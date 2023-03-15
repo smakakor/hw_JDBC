@@ -16,24 +16,36 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @Column(name = "city_id")
-    private int cityId;
+//    @Column(name = "city_id")
+//    private int cityId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    public Employee(int id, String firstname, String lastname, String gender, int age, int cityId) {
+//    public Employee(int id, String firstname, String lastname, String gender, int age, int cityId) {
+//        this.id = id;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.gender = gender;
+//        this.age = age;
+//        this.cityId = cityId;
+//    }
+
+//    public Employee(String firstname, String lastname, String gender, int age, int cityId) {
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.gender = gender;
+//        this.age = age;
+//        this.cityId = cityId;
+//    }
+
+    public Employee(int id, String firstname, String lastname, String gender, int age, City city) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
         this.age = age;
-        this.cityId = cityId;
-    }
-
-    public Employee(String firstname, String lastname, String gender, int age, int cityId) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.age = age;
-        this.cityId = cityId;
+        this.city = city;
     }
 
     public Employee() {
@@ -81,27 +93,21 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCityId() {
-        return cityId;
+//    public int getCityId() {
+//        return cityId;
+//    }
+//
+//    public void setCityId(int cityId) {
+//        this.cityId = cityId;
+//    }
+
+    public City getCity() {
+        return city;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id && age == employee.age && cityId == employee.cityId && Objects.equals(firstname, employee.firstname) && Objects.equals(lastname, employee.lastname) && Objects.equals(gender, employee.gender);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname, gender, age, cityId);
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
@@ -110,7 +116,7 @@ public class Employee {
                 ", lastname='" + lastname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
-                ", city=" + cityId +
+                ", city=" + city +
                 '}';
     }
 }
